@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 300vh; /* Set a height to enable scrolling */
+        }
+        
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+        
+        .animated {
+            opacity: 0;
+            transform: translateY(40px); /* Initial position outside viewport */
+            transition: opacity 0.8s ease, transform 0.8s ease; /* Animation transition */
+        }
+        
+        .animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="section animated">
+        <h1>Section 1</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet magna at orci ultricies volutpat.</p>
+    </div>
+    <div class="section animated">
+        <h1>Section 2</h1>
+        <p>Nulla efficitur urna vitae aliquam ultricies. Sed volutpat eleifend quam, sit amet efficitur felis fermentum sed.</p>
+    </div>
+    <div class="section animated">
+        <h1>Section 3</h1>
+        <p>Vivamus vitae felis auctor, hendrerit ex et, commodo ipsum. Proin ut enim eget enim interdum dapibus.</p>
+    </div>
+    <!-- Rest of the sections... -->
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        
+        function animateSections() {
+            sections.forEach((section) => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight) {
+                    section.classList.add('animate');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', animateSections);
+    </script>
+</body>
+</html>

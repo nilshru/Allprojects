@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="head"><h1>Otp Genarator</h1></div>
+        <div id="main"></div>
+        <button type="submit" id="btn" onmousedown="mousedown()" onmouseup="mouseup()">Genarate</button>
+    </div>
+    <script>
+        var main = document.getElementById('main');
+        var btn = document.getElementById('btn');
+        function genarate(){
+            var numGenerate = Math.floor(Math.random()*1000000) +1; //1 is to remove 0
+            if (numGenerate <100000){
+                genarate()
+            } else{
+            main.innerHTML = numGenerate 
+            }
+        }
+        function mousedown(){
+            btn.style.border = "2px solid rgba(255, 0, 0)"
+            btn.style.backgroundColor = "rgb(0, 255, 0)"
+            btn.innerText = "Generated"
+        }
+        function mouseup(){
+            btn.style.border ="2px solid white"
+            btn.style.backgroundColor = "rgb(255, 0, 0, 0.6)"
+            btn.innerText = "Generate"
+
+            
+        }
+        btn.addEventListener('click', genarate)
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blurry Loading</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+        
+        .bg {
+            background: url(unsplash.jpg) no-repeat center center/cover;
+            position: absolute;
+            /* top: -30px;
+            left: -30px; */
+            width: 100vw;
+            height: 100vh ;
+            z-index: -1;
+            filter: blur(30px); /* Start with a higher blur value */
+            transition: filter 0.5s ease; /* Add transition for smooth effect */
+        }
+        
+        .loading-text {
+            font-size: 50px;
+            color: #fff;
+            transition: opacity 0.5s ease; /* Add transition for smooth effect */
+        }
+        
+        .loading-text.hidden {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <section class="bg"></section>
+    <div class="loading-text">0%</div>
+
+    <script>
+        const loadingText = document.querySelector('.loading-text');
+        const bg = document.querySelector('.bg');
+        let load = 0;
+        let int = setInterval(blurring, 10);
+
+        function blurring() {
+            load++;
+            if (load > 99) {
+                clearInterval(int);
+                loadingText.classList.add('hidden'); // Add the 'hidden' class to make the loading text disappear
+            }
+            
+            loadingText.innerText = `${load}%`;
+            bg.style.filter = `blur(${10 - (load * 0.1)}px)`; // Gradually decrease blur value
+        }
+    </script>
+</body>
+</html>
